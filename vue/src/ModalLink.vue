@@ -59,6 +59,16 @@ const props = defineProps({
         required: false,
         default: null,
     },
+    method: {
+        type: String,
+        required: false,
+        default: 'get',
+    },
+    data: {
+        type: Object,
+        required: false,
+        default: {},
+    },
 })
 
 const loading = ref(false)
@@ -143,8 +153,9 @@ function handle() {
     emit('start')
 
     Axios({
-        method: 'get',
+        method: props.method,
         url: props.href,
+        data: props.data,
         headers: {
             ...props.headers,
             Accept: 'text/html, application/xhtml+xml',
