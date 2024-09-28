@@ -1,7 +1,7 @@
 <script setup>
 import { default as Axios } from 'axios'
 import { modalPropNames, useModalStack } from './modalStack'
-import { nextTick, ref, provide, watch, markRaw, onMounted, useAttrs } from 'vue'
+import { nextTick, ref, provide, watch, markRaw, onMounted, useAttrs, defineExpose } from 'vue'
 import { only, rejectNullValues } from './helpers'
 import { router, usePage } from '@inertiajs/vue3'
 
@@ -177,6 +177,8 @@ function handle() {
             loading.value = false
         })
 }
+
+defineExpose({ handle })
 </script>
 
 <template>

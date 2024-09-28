@@ -2,7 +2,7 @@ var vr = Object.defineProperty;
 var gr = (e, t, n) => t in e ? vr(e, t, { enumerable: !0, configurable: !0, writable: !0, value: n }) : e[t] = n;
 var ne = (e, t, n) => gr(e, typeof t != "symbol" ? t + "" : t, n);
 import * as Jt from "vue";
-import { watchEffect as J, ref as w, computed as x, cloneVNode as yr, h as L, Fragment as Nt, defineComponent as j, inject as $, provide as z, onMounted as F, onUnmounted as K, watch as ae, shallowRef as wr, unref as A, getCurrentInstance as br, Teleport as xr, reactive as Er, nextTick as hn, normalizeClass as de, openBlock as U, createElementBlock as he, createElementVNode as xe, createVNode as fe, withCtx as Y, createCommentVNode as Fe, renderSlot as De, readonly as Sr, useAttrs as vn, createBlock as Ee, withDirectives as gn, vShow as yn, onBeforeUnmount as Or, resolveDynamicComponent as wn, markRaw as Tr, mergeProps as Kt, withModifiers as Pr } from "vue";
+import { watchEffect as J, ref as w, computed as E, cloneVNode as yr, h as L, Fragment as Nt, defineComponent as j, inject as $, provide as z, onMounted as F, onUnmounted as K, watch as ae, shallowRef as wr, unref as A, getCurrentInstance as br, Teleport as xr, reactive as Er, nextTick as hn, normalizeClass as de, openBlock as U, createElementBlock as he, createElementVNode as xe, createVNode as fe, withCtx as Y, createCommentVNode as Fe, renderSlot as De, readonly as Sr, useAttrs as vn, createBlock as Ee, withDirectives as gn, vShow as yn, onBeforeUnmount as Or, resolveDynamicComponent as wn, markRaw as Tr, mergeProps as Kt, withModifiers as Pr } from "vue";
 import { usePage as Cr, router as Rr } from "@inertiajs/vue3";
 const He = {
   type: "modal",
@@ -209,18 +209,18 @@ function ze(e, t, { sorted: n = !0, relativeTo: r = null, skipElements: o = [] }
     if (t & 4) return Math.max(0, i.indexOf(r)) + 1;
     if (t & 8) return i.length - 1;
     throw new Error("Missing Focus.First, Focus.Previous, Focus.Next or Focus.Last");
-  })(), u = t & 32 ? { preventScroll: !0 } : {}, p = 0, g = i.length, v;
+  })(), u = t & 32 ? { preventScroll: !0 } : {}, p = 0, v = i.length, g;
   do {
-    if (p >= g || p + g <= 0) return 0;
+    if (p >= v || p + v <= 0) return 0;
     let f = l + p;
-    if (t & 16) f = (f + g) % g;
+    if (t & 16) f = (f + v) % v;
     else {
       if (f < 0) return 3;
-      if (f >= g) return 1;
+      if (f >= v) return 1;
     }
-    v = i[f], v == null || v.focus(u), p += c;
-  } while (v !== a.activeElement);
-  return t & 6 && Hr(v) && v.select(), 2;
+    g = i[f], g == null || g.focus(u), p += c;
+  } while (g !== a.activeElement);
+  return t & 6 && Hr(g) && g.select(), 2;
 }
 function En() {
   return /iPhone/gi.test(window.navigator.platform) || /Mac/gi.test(window.navigator.platform) && window.navigator.maxTouchPoints > 0;
@@ -241,7 +241,7 @@ function Sn(e, t, n) {
     window.addEventListener(e, t, n), r(() => window.removeEventListener(e, t, n));
   });
 }
-function zr(e, t, n = x(() => !0)) {
+function zr(e, t, n = E(() => !0)) {
   function r(s, a) {
     if (!n.value || s.defaultPrevented) return;
     let i = a(s);
@@ -286,19 +286,19 @@ function ct({ props: e, attrs: t, slots: n, slot: r, name: o }) {
   var s, a;
   let { as: i, ...c } = Pn(e, ["unmount", "static"]), l = (s = n.default) == null ? void 0 : s.call(n, r), u = {};
   if (r) {
-    let p = !1, g = [];
-    for (let [v, f] of Object.entries(r)) typeof f == "boolean" && (p = !0), f === !0 && g.push(v);
-    p && (u["data-headlessui-state"] = g.join(" "));
+    let p = !1, v = [];
+    for (let [g, f] of Object.entries(r)) typeof f == "boolean" && (p = !0), f === !0 && v.push(g);
+    p && (u["data-headlessui-state"] = v.join(" "));
   }
   if (i === "template") {
     if (l = On(l ?? []), Object.keys(c).length > 0 || Object.keys(t).length > 0) {
-      let [p, ...g] = l ?? [];
-      if (!Vr(p) || g.length > 0) throw new Error(['Passing props on "template"!', "", `The current component <${o} /> is rendering a "template".`, "However we need to passthrough the following props:", Object.keys(c).concat(Object.keys(t)).map((m) => m.trim()).filter((m, h, b) => b.indexOf(m) === h).sort((m, h) => m.localeCompare(h)).map((m) => `  - ${m}`).join(`
-`), "", "You can apply a few solutions:", ['Add an `as="..."` prop, to ensure that we render an actual element instead of a "template".', "Render a single element as the child so that we can forward the props onto that element."].map((m) => `  - ${m}`).join(`
+      let [p, ...v] = l ?? [];
+      if (!Vr(p) || v.length > 0) throw new Error(['Passing props on "template"!', "", `The current component <${o} /> is rendering a "template".`, "However we need to passthrough the following props:", Object.keys(c).concat(Object.keys(t)).map((h) => h.trim()).filter((h, m, b) => b.indexOf(h) === m).sort((h, m) => h.localeCompare(m)).map((h) => `  - ${h}`).join(`
+`), "", "You can apply a few solutions:", ['Add an `as="..."` prop, to ensure that we render an actual element instead of a "template".', "Render a single element as the child so that we can forward the props onto that element."].map((h) => `  - ${h}`).join(`
 `)].join(`
 `));
-      let v = Tn((a = p.props) != null ? a : {}, c, u), f = yr(p, v, !0);
-      for (let m in v) m.startsWith("on") && (f.props || (f.props = {}), f.props[m] = v[m]);
+      let g = Tn((a = p.props) != null ? a : {}, c, u), f = yr(p, g, !0);
+      for (let h in g) h.startsWith("on") && (f.props || (f.props = {}), f.props[h] = g[h]);
       return f;
     }
     return Array.isArray(l) && l.length === 1 ? l[0] : l;
@@ -389,37 +389,37 @@ var Fn = ((e) => (e[e.None = 1] = "None", e[e.InitialFocus = 2] = "InitialFocus"
 let Ce = Object.assign(j({ name: "FocusTrap", props: { as: { type: [Object, String], default: "div" }, initialFocus: { type: Object, default: null }, features: { type: Number, default: 30 }, containers: { type: [Object, Function], default: w(/* @__PURE__ */ new Set()) } }, inheritAttrs: !1, setup(e, { attrs: t, slots: n, expose: r }) {
   let o = w(null);
   r({ el: o, $el: o });
-  let s = x(() => Se(o)), a = w(!1);
-  F(() => a.value = !0), K(() => a.value = !1), Qr({ ownerDocument: s }, x(() => a.value && !!(e.features & 16)));
-  let i = Zr({ ownerDocument: s, container: o, initialFocus: x(() => e.initialFocus) }, x(() => a.value && !!(e.features & 2)));
-  eo({ ownerDocument: s, container: o, containers: e.containers, previousActiveElement: i }, x(() => a.value && !!(e.features & 8)));
+  let s = E(() => Se(o)), a = w(!1);
+  F(() => a.value = !0), K(() => a.value = !1), Qr({ ownerDocument: s }, E(() => a.value && !!(e.features & 16)));
+  let i = Zr({ ownerDocument: s, container: o, initialFocus: E(() => e.initialFocus) }, E(() => a.value && !!(e.features & 2)));
+  eo({ ownerDocument: s, container: o, containers: e.containers, previousActiveElement: i }, E(() => a.value && !!(e.features & 8)));
   let c = Gr();
-  function l(v) {
+  function l(g) {
     let f = C(o);
-    f && ((m) => m())(() => {
+    f && ((h) => h())(() => {
       Q(c.value, { [Le.Forwards]: () => {
-        ze(f, oe.First, { skipElements: [v.relatedTarget] });
+        ze(f, oe.First, { skipElements: [g.relatedTarget] });
       }, [Le.Backwards]: () => {
-        ze(f, oe.Last, { skipElements: [v.relatedTarget] });
+        ze(f, oe.Last, { skipElements: [g.relatedTarget] });
       } });
     });
   }
   let u = w(!1);
-  function p(v) {
-    v.key === "Tab" && (u.value = !0, requestAnimationFrame(() => {
+  function p(g) {
+    g.key === "Tab" && (u.value = !0, requestAnimationFrame(() => {
       u.value = !1;
     }));
   }
-  function g(v) {
+  function v(g) {
     if (!a.value) return;
     let f = Ln(e.containers);
     C(o) instanceof HTMLElement && f.add(C(o));
-    let m = v.relatedTarget;
-    m instanceof HTMLElement && m.dataset.headlessuiFocusGuard !== "true" && (Nn(f, m) || (u.value ? ze(C(o), Q(c.value, { [Le.Forwards]: () => oe.Next, [Le.Backwards]: () => oe.Previous }) | oe.WrapAround, { relativeTo: v.target }) : v.target instanceof HTMLElement && pe(v.target)));
+    let h = g.relatedTarget;
+    h instanceof HTMLElement && h.dataset.headlessuiFocusGuard !== "true" && (Nn(f, h) || (u.value ? ze(C(o), Q(c.value, { [Le.Forwards]: () => oe.Next, [Le.Backwards]: () => oe.Previous }) | oe.WrapAround, { relativeTo: g.target }) : g.target instanceof HTMLElement && pe(g.target)));
   }
   return () => {
-    let v = {}, f = { ref: o, onKeydown: p, onFocusout: g }, { features: m, initialFocus: h, containers: b, ...E } = e;
-    return L(Nt, [!!(m & 4) && L(yt, { as: "button", type: "button", "data-headlessui-focus-guard": !0, onFocus: l, features: Xe.Focusable }), H({ ourProps: f, theirProps: { ...t, ...E }, slot: v, attrs: t, slots: n, name: "FocusTrap" }), !!(m & 4) && L(yt, { as: "button", type: "button", "data-headlessui-focus-guard": !0, onFocus: l, features: Xe.Focusable })]);
+    let g = {}, f = { ref: o, onKeydown: p, onFocusout: v }, { features: h, initialFocus: m, containers: b, ...x } = e;
+    return L(Nt, [!!(h & 4) && L(yt, { as: "button", type: "button", "data-headlessui-focus-guard": !0, onFocus: l, features: Xe.Focusable }), H({ ourProps: f, theirProps: { ...t, ...x }, slot: g, attrs: t, slots: n, name: "FocusTrap" }), !!(h & 4) && L(yt, { as: "button", type: "button", "data-headlessui-focus-guard": !0, onFocus: l, features: Xe.Focusable })]);
   };
 } }), { features: Fn });
 function Yr(e) {
@@ -453,14 +453,14 @@ function Zr({ ownerDocument: e, container: t, initialFocus: n }, r) {
       c && Dt(() => {
         var l, u;
         if (!s.value) return;
-        let p = C(n), g = (l = e.value) == null ? void 0 : l.activeElement;
+        let p = C(n), v = (l = e.value) == null ? void 0 : l.activeElement;
         if (p) {
-          if (p === g) {
-            o.value = g;
+          if (p === v) {
+            o.value = v;
             return;
           }
-        } else if (c.contains(g)) {
-          o.value = g;
+        } else if (c.contains(v)) {
+          o.value = v;
           return;
         }
         p ? pe(p) : ze(c, oe.First | oe.NoScroll) === bn.Error && console.warn("There are no focusable elements inside the <FocusTrap />"), o.value = (u = e.value) == null ? void 0 : u.activeElement;
@@ -589,7 +589,7 @@ ue.subscribe(() => {
   }
 });
 function io(e, t, n) {
-  let r = to(ue), o = x(() => {
+  let r = to(ue), o = E(() => {
     let s = e.value ? r.value.get(e.value) : void 0;
     return s ? s.count > 0 : !1;
   });
@@ -679,13 +679,13 @@ function mo({ slot: e = w({}), name: t = "Description", props: n = {} } = {}) {
       a !== -1 && r.value.splice(a, 1);
     };
   }
-  return z(Bn, { register: o, slot: e, name: t, props: n }), x(() => r.value.length > 0 ? r.value.join(" ") : void 0);
+  return z(Bn, { register: o, slot: e, name: t, props: n }), E(() => r.value.length > 0 ? r.value.join(" ") : void 0);
 }
 j({ name: "Description", props: { as: { type: [Object, String], default: "p" }, id: { type: String, default: null } }, setup(e, { attrs: t, slots: n }) {
   var r;
   let o = (r = e.id) != null ? r : `headlessui-description-${ge()}`, s = po();
   return F(() => K(s.register(o))), () => {
-    let { name: a = "Description", slot: i = w({}), props: c = {} } = s, { ...l } = e, u = { ...Object.entries(c).reduce((p, [g, v]) => Object.assign(p, { [g]: A(v) }), {}), id: o };
+    let { name: a = "Description", slot: i = w({}), props: c = {} } = s, { ...l } = e, u = { ...Object.entries(c).reduce((p, [v, g]) => Object.assign(p, { [v]: A(g) }), {}), id: o };
     return H({ ourProps: u, theirProps: l, slot: i.value, attrs: t, slots: n, name: a });
   };
 } });
@@ -710,8 +710,8 @@ function Qt(e, t) {
   return n <= 0 ? xt.delete(e) : xt.set(e, n), n;
 }
 let $n = j({ name: "Portal", props: { as: { type: [Object, String], default: "div" } }, setup(e, { slots: t, attrs: n }) {
-  let r = w(null), o = x(() => Se(r)), s = uo(), a = $(jn, null), i = w(s === !0 || a == null ? ho(r.value) : a.resolveTarget());
-  i.value && Qt(i.value, (g) => g + 1);
+  let r = w(null), o = E(() => Se(r)), s = uo(), a = $(jn, null), i = w(s === !0 || a == null ? ho(r.value) : a.resolveTarget());
+  i.value && Qt(i.value, (v) => v + 1);
   let c = w(!1);
   F(() => {
     c.value = !0;
@@ -721,16 +721,16 @@ let $n = j({ name: "Portal", props: { as: { type: [Object, String], default: "di
   let l = $(Et, null), u = !1, p = br();
   return ae(r, () => {
     if (u || !l) return;
-    let g = C(r);
-    g && (K(l.register(g), p), u = !0);
+    let v = C(r);
+    v && (K(l.register(v), p), u = !0);
   }), K(() => {
-    var g, v;
-    let f = (g = o.value) == null ? void 0 : g.getElementById("headlessui-portal-root");
-    !f || i.value !== f || Qt(i.value, (m) => m - 1) || i.value.children.length > 0 || (v = i.value.parentElement) == null || v.removeChild(i.value);
+    var v, g;
+    let f = (v = o.value) == null ? void 0 : v.getElementById("headlessui-portal-root");
+    !f || i.value !== f || Qt(i.value, (h) => h - 1) || i.value.children.length > 0 || (g = i.value.parentElement) == null || g.removeChild(i.value);
   }), () => {
     if (!c.value || i.value === null) return null;
-    let g = { ref: r, "data-headlessui-portal": "" };
-    return L(xr, { to: i.value }, H({ ourProps: g, theirProps: e, slot: {}, attrs: n, slots: t, name: "Portal" }));
+    let v = { ref: r, "data-headlessui-portal": "" };
+    return L(xr, { to: i.value }, H({ ourProps: v, theirProps: e, slot: {}, attrs: n, slots: t, name: "Portal" }));
   };
 } }), Et = Symbol("PortalParentContext");
 function go() {
@@ -775,44 +775,44 @@ let _e = "DC8F892D-2EBD-447C-A4C8-A03058436FF4", bo = j({ name: "Dialog", inheri
   F(() => {
     c.value = !0;
   });
-  let l = !1, u = x(() => e.role === "dialog" || e.role === "alertdialog" ? e.role : (l || (l = !0, console.warn(`Invalid role [${u}] passed to <Dialog />. Only \`dialog\` and and \`alertdialog\` are supported. Using \`dialog\` instead.`)), "dialog")), p = w(0), g = kt(), v = x(() => e.open === _e && g !== null ? (g.value & M.Open) === M.Open : e.open), f = w(null), m = x(() => Se(f));
-  if (o({ el: f, $el: f }), !(e.open !== _e || g !== null)) throw new Error("You forgot to provide an `open` prop to the `Dialog`.");
-  if (typeof v.value != "boolean") throw new Error(`You provided an \`open\` prop to the \`Dialog\`, but the value is not a boolean. Received: ${v.value === _e ? void 0 : e.open}`);
-  let h = x(() => c.value && v.value ? 0 : 1), b = x(() => h.value === 0), E = x(() => p.value > 1), S = $(St, null) !== null, [D, R] = go(), { resolveContainers: N, mainTreeNodeRef: q, MainTreeNode: Z } = lo({ portals: D, defaultContainers: [x(() => {
+  let l = !1, u = E(() => e.role === "dialog" || e.role === "alertdialog" ? e.role : (l || (l = !0, console.warn(`Invalid role [${u}] passed to <Dialog />. Only \`dialog\` and and \`alertdialog\` are supported. Using \`dialog\` instead.`)), "dialog")), p = w(0), v = kt(), g = E(() => e.open === _e && v !== null ? (v.value & M.Open) === M.Open : e.open), f = w(null), h = E(() => Se(f));
+  if (o({ el: f, $el: f }), !(e.open !== _e || v !== null)) throw new Error("You forgot to provide an `open` prop to the `Dialog`.");
+  if (typeof g.value != "boolean") throw new Error(`You provided an \`open\` prop to the \`Dialog\`, but the value is not a boolean. Received: ${g.value === _e ? void 0 : e.open}`);
+  let m = E(() => c.value && g.value ? 0 : 1), b = E(() => m.value === 0), x = E(() => p.value > 1), S = $(St, null) !== null, [D, R] = go(), { resolveContainers: N, mainTreeNodeRef: q, MainTreeNode: Z } = lo({ portals: D, defaultContainers: [E(() => {
     var O;
     return (O = we.panelRef.value) != null ? O : f.value;
-  })] }), ye = x(() => E.value ? "parent" : "leaf"), Ue = x(() => g !== null ? (g.value & M.Closing) === M.Closing : !1), it = x(() => S || Ue.value ? !1 : b.value), lt = x(() => {
+  })] }), ye = E(() => x.value ? "parent" : "leaf"), Ue = E(() => v !== null ? (v.value & M.Closing) === M.Closing : !1), it = E(() => S || Ue.value ? !1 : b.value), lt = E(() => {
     var O, T, _;
-    return (_ = Array.from((T = (O = m.value) == null ? void 0 : O.querySelectorAll("body > *")) != null ? T : []).find((W) => W.id === "headlessui-portal-root" ? !1 : W.contains(C(q)) && W instanceof HTMLElement)) != null ? _ : null;
+    return (_ = Array.from((T = (O = h.value) == null ? void 0 : O.querySelectorAll("body > *")) != null ? T : []).find((W) => W.id === "headlessui-portal-root" ? !1 : W.contains(C(q)) && W instanceof HTMLElement)) != null ? _ : null;
   });
   Yt(lt, it);
-  let G = x(() => E.value ? !0 : b.value), Pe = x(() => {
+  let G = E(() => x.value ? !0 : b.value), Pe = E(() => {
     var O, T, _;
-    return (_ = Array.from((T = (O = m.value) == null ? void 0 : O.querySelectorAll("[data-headlessui-portal]")) != null ? T : []).find((W) => W.contains(C(q)) && W instanceof HTMLElement)) != null ? _ : null;
+    return (_ = Array.from((T = (O = h.value) == null ? void 0 : O.querySelectorAll("[data-headlessui-portal]")) != null ? T : []).find((W) => W.contains(C(q)) && W instanceof HTMLElement)) != null ? _ : null;
   });
-  Yt(Pe, G), fo({ type: "Dialog", enabled: x(() => h.value === 0), element: f, onUpdate: (O, T) => {
+  Yt(Pe, G), fo({ type: "Dialog", enabled: E(() => m.value === 0), element: f, onUpdate: (O, T) => {
     if (T === "Dialog") return Q(O, { [bt.Add]: () => p.value += 1, [bt.Remove]: () => p.value -= 1 });
   } });
-  let ee = mo({ name: "DialogDescription", slot: x(() => ({ open: v.value })) }), te = w(null), we = { titleId: te, panelRef: w(null), dialogState: h, setTitleId(O) {
+  let ee = mo({ name: "DialogDescription", slot: E(() => ({ open: g.value })) }), te = w(null), we = { titleId: te, panelRef: w(null), dialogState: m, setTitleId(O) {
     te.value !== O && (te.value = O);
   }, close() {
     t("close", !1);
   } };
   z(St, we);
-  let Wt = x(() => !(!b.value || E.value));
+  let Wt = E(() => !(!b.value || x.value));
   zr(N, (O, T) => {
     O.preventDefault(), we.close(), hn(() => T == null ? void 0 : T.focus());
   }, Wt);
-  let zt = x(() => !(E.value || h.value !== 0));
-  An((a = m.value) == null ? void 0 : a.defaultView, "keydown", (O) => {
+  let zt = E(() => !(x.value || m.value !== 0));
+  An((a = h.value) == null ? void 0 : a.defaultView, "keydown", (O) => {
     zt.value && (O.defaultPrevented || O.key === Rn.Escape && (O.preventDefault(), O.stopPropagation(), we.close()));
   });
-  let Vt = x(() => !(Ue.value || h.value !== 0 || S));
-  return io(m, Vt, (O) => {
+  let Vt = E(() => !(Ue.value || m.value !== 0 || S));
+  return io(h, Vt, (O) => {
     var T;
     return { containers: [...(T = O.containers) != null ? T : [], N] };
   }), J((O) => {
-    if (h.value !== 0) return;
+    if (m.value !== 0) return;
     let T = C(f);
     if (!T) return;
     let _ = new ResizeObserver((W) => {
@@ -823,8 +823,8 @@ let _e = "DC8F892D-2EBD-447C-A4C8-A03058436FF4", bo = j({ name: "Dialog", inheri
     });
     _.observe(T), O(() => _.disconnect());
   }), () => {
-    let { open: O, initialFocus: T, ..._ } = e, W = { ...n, ref: f, id: i, role: u.value, "aria-modal": h.value === 0 ? !0 : void 0, "aria-labelledby": te.value, "aria-describedby": ee.value }, ut = { open: h.value === 0 };
-    return L(wt, { force: !0 }, () => [L($n, () => L(yo, { target: f.value }, () => L(wt, { force: !1 }, () => L(Ce, { initialFocus: T, containers: N, features: b.value ? Q(ye.value, { parent: Ce.features.RestoreFocus, leaf: Ce.features.All & ~Ce.features.FocusLock }) : Ce.features.None }, () => L(R, {}, () => H({ ourProps: W, theirProps: { ..._, ...n }, slot: ut, attrs: n, slots: r, visible: h.value === 0, features: Ke.RenderStrategy | Ke.Static, name: "Dialog" })))))), L(Z)]);
+    let { open: O, initialFocus: T, ..._ } = e, W = { ...n, ref: f, id: i, role: u.value, "aria-modal": m.value === 0 ? !0 : void 0, "aria-labelledby": te.value, "aria-describedby": ee.value }, ut = { open: m.value === 0 };
+    return L(wt, { force: !0 }, () => [L($n, () => L(yo, { target: f.value }, () => L(wt, { force: !1 }, () => L(Ce, { initialFocus: T, containers: N, features: b.value ? Q(ye.value, { parent: Ce.features.RestoreFocus, leaf: Ce.features.All & ~Ce.features.FocusLock }) : Ce.features.None }, () => L(R, {}, () => H({ ourProps: W, theirProps: { ..._, ...n }, slot: ut, attrs: n, slots: r, visible: m.value === 0, features: Ke.RenderStrategy | Ke.Static, name: "Dialog" })))))), L(Z)]);
   };
 } });
 j({ name: "DialogOverlay", props: { as: { type: [Object, String], default: "div" }, id: { type: String, default: null } }, setup(e, { attrs: t, slots: n }) {
@@ -953,56 +953,56 @@ let In = Ke.RenderStrategy, tt = j({ props: { as: { type: [Object, String], defa
     s.value &= ~M.Closing, t("afterLeave");
   }
   if (!Oo() && Jr()) return () => L(Hn, { ...e, onBeforeEnter: a, onAfterEnter: i, onBeforeLeave: c, onAfterLeave: l }, r);
-  let u = w(null), p = x(() => e.unmount ? se.Unmount : se.Hidden);
+  let u = w(null), p = E(() => e.unmount ? se.Unmount : se.Hidden);
   o({ el: u, $el: u });
-  let { show: g, appear: v } = To(), { register: f, unregister: m } = Po(), h = w(g.value ? "visible" : "hidden"), b = { value: !0 }, E = ge(), S = { value: !1 }, D = Un(() => {
-    !S.value && h.value !== "hidden" && (h.value = "hidden", m(E), l());
+  let { show: v, appear: g } = To(), { register: f, unregister: h } = Po(), m = w(v.value ? "visible" : "hidden"), b = { value: !0 }, x = ge(), S = { value: !1 }, D = Un(() => {
+    !S.value && m.value !== "hidden" && (m.value = "hidden", h(x), l());
   });
   F(() => {
-    let G = f(E);
+    let G = f(x);
     K(G);
   }), J(() => {
-    if (p.value === se.Hidden && E) {
-      if (g.value && h.value !== "visible") {
-        h.value = "visible";
+    if (p.value === se.Hidden && x) {
+      if (v.value && m.value !== "visible") {
+        m.value = "visible";
         return;
       }
-      Q(h.value, { hidden: () => m(E), visible: () => f(E) });
+      Q(m.value, { hidden: () => h(x), visible: () => f(x) });
     }
   });
   let R = ie(e.enter), N = ie(e.enterFrom), q = ie(e.enterTo), Z = ie(e.entered), ye = ie(e.leave), Ue = ie(e.leaveFrom), it = ie(e.leaveTo);
   F(() => {
     J(() => {
-      if (h.value === "visible") {
+      if (m.value === "visible") {
         let G = C(u);
         if (G instanceof Comment && G.data === "") throw new Error("Did you forget to passthrough the `ref` to the actual DOM node?");
       }
     });
   });
   function lt(G) {
-    let Pe = b.value && !v.value, ee = C(u);
-    !ee || !(ee instanceof HTMLElement) || Pe || (S.value = !0, g.value && a(), g.value || c(), G(g.value ? Zt(ee, R, N, q, Z, (te) => {
+    let Pe = b.value && !g.value, ee = C(u);
+    !ee || !(ee instanceof HTMLElement) || Pe || (S.value = !0, v.value && a(), v.value || c(), G(v.value ? Zt(ee, R, N, q, Z, (te) => {
       S.value = !1, te === Ot.Finished && i();
     }) : Zt(ee, ye, Ue, it, Z, (te) => {
-      S.value = !1, te === Ot.Finished && (et(D) || (h.value = "hidden", m(E), l()));
+      S.value = !1, te === Ot.Finished && (et(D) || (m.value = "hidden", h(x), l()));
     })));
   }
   return F(() => {
-    ae([g], (G, Pe, ee) => {
+    ae([v], (G, Pe, ee) => {
       lt(ee), b.value = !1;
     }, { immediate: !0 });
-  }), z($t, D), Kr(x(() => Q(h.value, { visible: M.Open, hidden: M.Closed }) | s.value)), () => {
-    let { appear: G, show: Pe, enter: ee, enterFrom: te, enterTo: we, entered: Wt, leave: zt, leaveFrom: Vt, leaveTo: O, ...T } = e, _ = { ref: u }, W = { ...T, ...v.value && g.value && Be.isServer ? { class: de([n.class, T.class, ...R, ...N]) } : {} };
-    return H({ theirProps: W, ourProps: _, slot: {}, slots: r, attrs: n, features: In, visible: h.value === "visible", name: "TransitionChild" });
+  }), z($t, D), Kr(E(() => Q(m.value, { visible: M.Open, hidden: M.Closed }) | s.value)), () => {
+    let { appear: G, show: Pe, enter: ee, enterFrom: te, enterTo: we, entered: Wt, leave: zt, leaveFrom: Vt, leaveTo: O, ...T } = e, _ = { ref: u }, W = { ...T, ...g.value && v.value && Be.isServer ? { class: de([n.class, T.class, ...R, ...N]) } : {} };
+    return H({ theirProps: W, ourProps: _, slot: {}, slots: r, attrs: n, features: In, visible: m.value === "visible", name: "TransitionChild" });
   };
 } }), Co = tt, Hn = j({ inheritAttrs: !1, props: { as: { type: [Object, String], default: "div" }, show: { type: [Boolean], default: null }, unmount: { type: [Boolean], default: !0 }, appear: { type: [Boolean], default: !1 }, enter: { type: [String], default: "" }, enterFrom: { type: [String], default: "" }, enterTo: { type: [String], default: "" }, entered: { type: [String], default: "" }, leave: { type: [String], default: "" }, leaveFrom: { type: [String], default: "" }, leaveTo: { type: [String], default: "" } }, emits: { beforeEnter: () => !0, afterEnter: () => !0, beforeLeave: () => !0, afterLeave: () => !0 }, setup(e, { emit: t, attrs: n, slots: r }) {
-  let o = kt(), s = x(() => e.show === null && o !== null ? (o.value & M.Open) === M.Open : e.show);
+  let o = kt(), s = E(() => e.show === null && o !== null ? (o.value & M.Open) === M.Open : e.show);
   J(() => {
     if (![!0, !1].includes(s.value)) throw new Error('A <Transition /> is used but it is missing a `:show="true | false"` prop.');
   });
   let a = w(s.value ? "visible" : "hidden"), i = Un(() => {
     a.value = "hidden";
-  }), c = w(!0), l = { show: s, appear: x(() => e.appear || !c.value) };
+  }), c = w(!0), l = { show: s, appear: E(() => e.appear || !c.value) };
   return F(() => {
     J(() => {
       c.value = !1, s.value ? a.value = "visible" : et(i) || (a.value = "hidden");
@@ -1413,8 +1413,8 @@ function st(e, t, n) {
     metaTokens: !0,
     dots: !1,
     indexes: !1
-  }, !1, function(m, h) {
-    return !d.isUndefined(h[m]);
+  }, !1, function(h, m) {
+    return !d.isUndefined(m[h]);
   });
   const r = n.metaTokens, o = n.visitor || u, s = n.dots, a = n.indexes, c = (n.Blob || typeof Blob < "u" && Blob) && d.isSpecCompliantForm(t);
   if (!d.isFunction(o))
@@ -1427,45 +1427,45 @@ function st(e, t, n) {
       throw new y("Blob is not supported. Use a Buffer instead.");
     return d.isArrayBuffer(f) || d.isTypedArray(f) ? c && typeof Blob == "function" ? new Blob([f]) : Buffer.from(f) : f;
   }
-  function u(f, m, h) {
+  function u(f, h, m) {
     let b = f;
-    if (f && !h && typeof f == "object") {
-      if (d.endsWith(m, "{}"))
-        m = r ? m : m.slice(0, -2), f = JSON.stringify(f);
-      else if (d.isArray(f) && xs(f) || (d.isFileList(f) || d.endsWith(m, "[]")) && (b = d.toArray(f)))
-        return m = Zn(m), b.forEach(function(S, D) {
+    if (f && !m && typeof f == "object") {
+      if (d.endsWith(h, "{}"))
+        h = r ? h : h.slice(0, -2), f = JSON.stringify(f);
+      else if (d.isArray(f) && xs(f) || (d.isFileList(f) || d.endsWith(h, "[]")) && (b = d.toArray(f)))
+        return h = Zn(h), b.forEach(function(S, D) {
           !(d.isUndefined(S) || S === null) && t.append(
             // eslint-disable-next-line no-nested-ternary
-            a === !0 ? nn([m], D, s) : a === null ? m : m + "[]",
+            a === !0 ? nn([h], D, s) : a === null ? h : h + "[]",
             l(S)
           );
         }), !1;
     }
-    return Pt(f) ? !0 : (t.append(nn(h, m, s), l(f)), !1);
+    return Pt(f) ? !0 : (t.append(nn(m, h, s), l(f)), !1);
   }
-  const p = [], g = Object.assign(Es, {
+  const p = [], v = Object.assign(Es, {
     defaultVisitor: u,
     convertValue: l,
     isVisitable: Pt
   });
-  function v(f, m) {
+  function g(f, h) {
     if (!d.isUndefined(f)) {
       if (p.indexOf(f) !== -1)
-        throw Error("Circular reference detected in " + m.join("."));
-      p.push(f), d.forEach(f, function(b, E) {
+        throw Error("Circular reference detected in " + h.join("."));
+      p.push(f), d.forEach(f, function(b, x) {
         (!(d.isUndefined(b) || b === null) && o.call(
           t,
           b,
-          d.isString(E) ? E.trim() : E,
-          m,
-          g
-        )) === !0 && v(b, m ? m.concat(E) : [E]);
+          d.isString(x) ? x.trim() : x,
+          h,
+          v
+        )) === !0 && g(b, h ? h.concat(x) : [x]);
       }), p.pop();
     }
   }
   if (!d.isObject(e))
     throw new TypeError("data must be an object");
-  return v(e), t;
+  return g(e), t;
 }
 function rn(e) {
   const t = {
@@ -1931,13 +1931,13 @@ function _s(e, t) {
   return t = t !== void 0 ? t : 1e3, function(c) {
     const l = Date.now(), u = r[s];
     a || (a = l), n[o] = c, r[o] = l;
-    let p = s, g = 0;
+    let p = s, v = 0;
     for (; p !== o; )
-      g += n[p++], p = p % e;
+      v += n[p++], p = p % e;
     if (o = (o + 1) % e, o === s && (s = (s + 1) % e), l - a < t)
       return;
-    const v = u && l - u;
-    return v ? Math.round(g * 1e3 / v) : void 0;
+    const g = u && l - u;
+    return g ? Math.round(v * 1e3 / g) : void 0;
   };
 }
 function Ws(e, t) {
@@ -2106,8 +2106,8 @@ function ve(e, t) {
     headers: (l, u) => o(un(l), un(u), !0)
   };
   return d.forEach(Object.keys(Object.assign({}, e, t)), function(u) {
-    const p = c[u] || o, g = p(e[u], t[u], u);
-    d.isUndefined(g) && p !== i || (n[u] = g);
+    const p = c[u] || o, v = p(e[u], t[u], u);
+    d.isUndefined(v) && p !== i || (n[u] = v);
   }), n;
 }
 const ir = (e) => {
@@ -2136,57 +2136,57 @@ const ir = (e) => {
     const o = ir(e);
     let s = o.data;
     const a = B.from(o.headers).normalize();
-    let { responseType: i, onUploadProgress: c, onDownloadProgress: l } = o, u, p, g, v, f;
-    function m() {
-      v && v(), f && f(), o.cancelToken && o.cancelToken.unsubscribe(u), o.signal && o.signal.removeEventListener("abort", u);
+    let { responseType: i, onUploadProgress: c, onDownloadProgress: l } = o, u, p, v, g, f;
+    function h() {
+      g && g(), f && f(), o.cancelToken && o.cancelToken.unsubscribe(u), o.signal && o.signal.removeEventListener("abort", u);
     }
-    let h = new XMLHttpRequest();
-    h.open(o.method.toUpperCase(), o.url, !0), h.timeout = o.timeout;
+    let m = new XMLHttpRequest();
+    m.open(o.method.toUpperCase(), o.url, !0), m.timeout = o.timeout;
     function b() {
-      if (!h)
+      if (!m)
         return;
       const S = B.from(
-        "getAllResponseHeaders" in h && h.getAllResponseHeaders()
+        "getAllResponseHeaders" in m && m.getAllResponseHeaders()
       ), R = {
-        data: !i || i === "text" || i === "json" ? h.responseText : h.response,
-        status: h.status,
-        statusText: h.statusText,
+        data: !i || i === "text" || i === "json" ? m.responseText : m.response,
+        status: m.status,
+        statusText: m.statusText,
         headers: S,
         config: e,
-        request: h
+        request: m
       };
       sr(function(q) {
-        n(q), m();
+        n(q), h();
       }, function(q) {
-        r(q), m();
-      }, R), h = null;
+        r(q), h();
+      }, R), m = null;
     }
-    "onloadend" in h ? h.onloadend = b : h.onreadystatechange = function() {
-      !h || h.readyState !== 4 || h.status === 0 && !(h.responseURL && h.responseURL.indexOf("file:") === 0) || setTimeout(b);
-    }, h.onabort = function() {
-      h && (r(new y("Request aborted", y.ECONNABORTED, e, h)), h = null);
-    }, h.onerror = function() {
-      r(new y("Network Error", y.ERR_NETWORK, e, h)), h = null;
-    }, h.ontimeout = function() {
+    "onloadend" in m ? m.onloadend = b : m.onreadystatechange = function() {
+      !m || m.readyState !== 4 || m.status === 0 && !(m.responseURL && m.responseURL.indexOf("file:") === 0) || setTimeout(b);
+    }, m.onabort = function() {
+      m && (r(new y("Request aborted", y.ECONNABORTED, e, m)), m = null);
+    }, m.onerror = function() {
+      r(new y("Network Error", y.ERR_NETWORK, e, m)), m = null;
+    }, m.ontimeout = function() {
       let D = o.timeout ? "timeout of " + o.timeout + "ms exceeded" : "timeout exceeded";
       const R = o.transitional || nr;
       o.timeoutErrorMessage && (D = o.timeoutErrorMessage), r(new y(
         D,
         R.clarifyTimeoutError ? y.ETIMEDOUT : y.ECONNABORTED,
         e,
-        h
-      )), h = null;
-    }, s === void 0 && a.setContentType(null), "setRequestHeader" in h && d.forEach(a.toJSON(), function(D, R) {
-      h.setRequestHeader(R, D);
-    }), d.isUndefined(o.withCredentials) || (h.withCredentials = !!o.withCredentials), i && i !== "json" && (h.responseType = o.responseType), l && ([g, f] = Ge(l, !0), h.addEventListener("progress", g)), c && h.upload && ([p, v] = Ge(c), h.upload.addEventListener("progress", p), h.upload.addEventListener("loadend", v)), (o.cancelToken || o.signal) && (u = (S) => {
-      h && (r(!S || S.type ? new Te(null, e, h) : S), h.abort(), h = null);
+        m
+      )), m = null;
+    }, s === void 0 && a.setContentType(null), "setRequestHeader" in m && d.forEach(a.toJSON(), function(D, R) {
+      m.setRequestHeader(R, D);
+    }), d.isUndefined(o.withCredentials) || (m.withCredentials = !!o.withCredentials), i && i !== "json" && (m.responseType = o.responseType), l && ([v, f] = Ge(l, !0), m.addEventListener("progress", v)), c && m.upload && ([p, g] = Ge(c), m.upload.addEventListener("progress", p), m.upload.addEventListener("loadend", g)), (o.cancelToken || o.signal) && (u = (S) => {
+      m && (r(!S || S.type ? new Te(null, e, m) : S), m.abort(), m = null);
     }, o.cancelToken && o.cancelToken.subscribe(u), o.signal && (o.signal.aborted ? u() : o.signal.addEventListener("abort", u)));
-    const E = qs(o.url);
-    if (E && k.protocols.indexOf(E) === -1) {
-      r(new y("Unsupported protocol " + E + ":", y.ERR_BAD_REQUEST, e));
+    const x = qs(o.url);
+    if (x && k.protocols.indexOf(x) === -1) {
+      r(new y("Unsupported protocol " + x + ":", y.ERR_BAD_REQUEST, e));
       return;
     }
-    h.send(s || null);
+    m.send(s || null);
   });
 }, Ys = (e, t) => {
   const { length: n } = e = e ? e.filter(Boolean) : [];
@@ -2254,8 +2254,8 @@ const ir = (e) => {
         }
         let p = u.byteLength;
         if (n) {
-          let g = s += p;
-          n(g);
+          let v = s += p;
+          n(v);
         }
         c.enqueue(new Uint8Array(u));
       } catch (l) {
@@ -2324,16 +2324,16 @@ const ra = async (e) => {
     responseType: l,
     headers: u,
     withCredentials: p = "same-origin",
-    fetchOptions: g
+    fetchOptions: v
   } = ir(e);
   l = l ? (l + "").toLowerCase() : "text";
-  let v = Ys([o, s && s.toAbortSignal()], a), f;
-  const m = v && v.unsubscribe && (() => {
-    v.unsubscribe();
+  let g = Ys([o, s && s.toAbortSignal()], a), f;
+  const h = g && g.unsubscribe && (() => {
+    g.unsubscribe();
   });
-  let h;
+  let m;
   try {
-    if (c && na && n !== "get" && n !== "head" && (h = await oa(u, r)) !== 0) {
+    if (c && na && n !== "get" && n !== "head" && (m = await oa(u, r)) !== 0) {
       let R = new Request(t, {
         method: "POST",
         body: r,
@@ -2341,7 +2341,7 @@ const ra = async (e) => {
       }), N;
       if (d.isFormData(r) && (N = R.headers.get("content-type")) && u.setContentType(N), R.body) {
         const [q, Z] = an(
-          h,
+          m,
           Ge(ln(c))
         );
         r = cn(R.body, dn, q, Z);
@@ -2350,46 +2350,46 @@ const ra = async (e) => {
     d.isString(p) || (p = p ? "include" : "omit");
     const b = "credentials" in Request.prototype;
     f = new Request(t, {
-      ...g,
-      signal: v,
+      ...v,
+      signal: g,
       method: n.toUpperCase(),
       headers: u.normalize().toJSON(),
       body: r,
       duplex: "half",
       credentials: b ? p : void 0
     });
-    let E = await fetch(f);
+    let x = await fetch(f);
     const S = Rt && (l === "stream" || l === "response");
-    if (Rt && (i || S && m)) {
+    if (Rt && (i || S && h)) {
       const R = {};
       ["status", "statusText", "headers"].forEach((ye) => {
-        R[ye] = E[ye];
+        R[ye] = x[ye];
       });
-      const N = d.toFiniteNumber(E.headers.get("content-length")), [q, Z] = i && an(
+      const N = d.toFiniteNumber(x.headers.get("content-length")), [q, Z] = i && an(
         N,
         Ge(ln(i), !0)
       ) || [];
-      E = new Response(
-        cn(E.body, dn, q, () => {
-          Z && Z(), m && m();
+      x = new Response(
+        cn(x.body, dn, q, () => {
+          Z && Z(), h && h();
         }),
         R
       );
     }
     l = l || "text";
-    let D = await Ye[d.findKey(Ye, l) || "text"](E, e);
-    return !S && m && m(), await new Promise((R, N) => {
+    let D = await Ye[d.findKey(Ye, l) || "text"](x, e);
+    return !S && h && h(), await new Promise((R, N) => {
       sr(R, N, {
         data: D,
-        headers: B.from(E.headers),
-        status: E.status,
-        statusText: E.statusText,
+        headers: B.from(x.headers),
+        status: x.status,
+        statusText: x.statusText,
         config: e,
         request: f
       });
     });
   } catch (b) {
-    throw m && m(), b && b.name === "TypeError" && /fetch/i.test(b.message) ? Object.assign(
+    throw h && h(), b && b.name === "TypeError" && /fetch/i.test(b.message) ? Object.assign(
       new y("Network Error", y.ERR_NETWORK, e, f),
       {
         cause: b.cause || b
@@ -2566,37 +2566,37 @@ class me {
     ), n.headers = B.concat(a, s);
     const i = [];
     let c = !0;
-    this.interceptors.request.forEach(function(m) {
-      typeof m.runWhen == "function" && m.runWhen(n) === !1 || (c = c && m.synchronous, i.unshift(m.fulfilled, m.rejected));
+    this.interceptors.request.forEach(function(h) {
+      typeof h.runWhen == "function" && h.runWhen(n) === !1 || (c = c && h.synchronous, i.unshift(h.fulfilled, h.rejected));
     });
     const l = [];
-    this.interceptors.response.forEach(function(m) {
-      l.push(m.fulfilled, m.rejected);
+    this.interceptors.response.forEach(function(h) {
+      l.push(h.fulfilled, h.rejected);
     });
-    let u, p = 0, g;
+    let u, p = 0, v;
     if (!c) {
       const f = [pn.bind(this), void 0];
-      for (f.unshift.apply(f, i), f.push.apply(f, l), g = f.length, u = Promise.resolve(n); p < g; )
+      for (f.unshift.apply(f, i), f.push.apply(f, l), v = f.length, u = Promise.resolve(n); p < v; )
         u = u.then(f[p++], f[p++]);
       return u;
     }
-    g = i.length;
-    let v = n;
-    for (p = 0; p < g; ) {
-      const f = i[p++], m = i[p++];
+    v = i.length;
+    let g = n;
+    for (p = 0; p < v; ) {
+      const f = i[p++], h = i[p++];
       try {
-        v = f(v);
-      } catch (h) {
-        m.call(this, h);
+        g = f(g);
+      } catch (m) {
+        h.call(this, m);
         break;
       }
     }
     try {
-      u = pn.call(this, v);
+      u = pn.call(this, g);
     } catch (f) {
       return Promise.reject(f);
     }
-    for (p = 0, g = l.length; p < g; )
+    for (p = 0, v = l.length; p < v; )
       u = u.then(l[p++], l[p++]);
     return u;
   }
@@ -2855,7 +2855,7 @@ class _t {
         Object.assign(this.componentProps.value, r.data.props);
       });
     });
-    this.id = _t.generateId(), this.open = !1, this.listeners = {}, this.component = t, this.componentProps = w(n.props), this.response = n, this.modalProps = r, this.onCloseCallback = o, this.afterLeaveCallback = s, this.index = x(() => V.value.findIndex((a) => a.id === this.id)), this.getParentModal = () => this.getAdjacentModal(-1), this.getChildModal = () => this.getAdjacentModal(1), this.onTopOfStack = x(() => this.isOnTopOfStack());
+    this.id = _t.generateId(), this.open = !1, this.listeners = {}, this.component = t, this.componentProps = w(n.props), this.response = n, this.modalProps = r, this.onCloseCallback = o, this.afterLeaveCallback = s, this.index = E(() => V.value.findIndex((a) => a.id === this.id)), this.getParentModal = () => this.getAdjacentModal(-1), this.getChildModal = () => this.getAdjacentModal(1), this.onTopOfStack = E(() => this.isOnTopOfStack());
   }
   static generateId() {
     return typeof crypto < "u" && typeof crypto.randomUUID == "function" ? `inertiaui_modal_${crypto.randomUUID()}` : `inertiaui_modal_${Date.now().toString(36)}_${Math.random().toString(36).substr(2, 9)}`;
@@ -2926,7 +2926,7 @@ const ma = {
     }
   },
   setup(e) {
-    const t = e, n = $("modalContext"), r = x(() => ({
+    const t = e, n = $("modalContext"), r = E(() => ({
       ...qt(t, mr),
       ...n.value.modalProps
     }));
@@ -2959,7 +2959,7 @@ const ma = {
               onClose: o
             }, {
               default: Y(() => {
-                var p, g, v;
+                var p, v, g;
                 return [
                   ((p = A(n)) == null ? void 0 : p.index) === 0 ? (U(), Ee(A(tt), {
                     key: 0,
@@ -2981,7 +2981,7 @@ const ma = {
                     }),
                     _: 1
                   })) : Fe("", !0),
-                  ((g = A(n)) == null ? void 0 : g.index) > 0 && ((v = A(n)) != null && v.onTopOfStack) ? (U(), he("div", ha)) : Fe("", !0),
+                  ((v = A(n)) == null ? void 0 : v.index) > 0 && ((g = A(n)) != null && g.onTopOfStack) ? (U(), he("div", ha)) : Fe("", !0),
                   De(a.$slots, "default", {
                     modalContext: A(n),
                     modalProps: r.value
@@ -3176,82 +3176,82 @@ const ma = {
     }
   },
   emits: ["after-leave", "blur", "close", "error", "focus", "start", "success"],
-  setup(e, { emit: t }) {
-    const n = e, r = w(!1), o = hr(), s = w(null);
-    z("modalContext", s);
-    const a = t, i = w(!1);
+  setup(e, { expose: t, emit: n }) {
+    const r = e, o = w(!1), s = hr(), a = w(null);
+    z("modalContext", a);
+    const i = n, c = w(!1);
     ae(
       () => {
-        var v;
-        return (v = s.value) == null ? void 0 : v.isOnTopOfStack();
+        var f;
+        return (f = a.value) == null ? void 0 : f.isOnTopOfStack();
       },
-      (v) => {
-        s.value && (v && i.value ? a("focus") : v || a("blur"), i.value = !v);
+      (f) => {
+        a.value && (f && c.value ? i("focus") : f || i("blur"), c.value = !f);
       }
     ), F(() => {
-      n.fragment && window.location.hash === `#${n.fragment}` && g();
+      r.fragment && window.location.hash === `#${r.fragment}` && g();
     });
-    const c = vn();
-    function l(v, ...f) {
-      const m = v.replace(/-([a-z])/g, (b) => b[1].toUpperCase()), h = `on${m.charAt(0).toUpperCase()}${m.slice(1)}`;
-      h in c && c[h](...f);
+    const l = vn();
+    function u(f, ...h) {
+      const m = f.replace(/-([a-z])/g, (x) => x[1].toUpperCase()), b = `on${m.charAt(0).toUpperCase()}${m.slice(1)}`;
+      b in l && l[b](...h);
     }
-    ae(s, (v, f) => {
-      v && !f && (n.fragment && s.value.index === 0 && (window.location.hash = n.fragment), hn(() => {
-        s.value.open = !0, a("success");
+    ae(a, (f, h) => {
+      f && !h && (r.fragment && a.value.index === 0 && (window.location.hash = r.fragment), hn(() => {
+        a.value.open = !0, i("success");
       }));
     });
-    function u() {
-      n.fragment && s.value.index === 0 && (window.location.hash = ""), a("close");
-    }
     function p() {
-      s.value = null, a("after-leave");
+      r.fragment && a.value.index === 0 && (window.location.hash = ""), i("close");
+    }
+    function v() {
+      a.value = null, i("after-leave");
     }
     function g() {
-      if (r.value)
+      if (o.value)
         return;
-      const v = da(qt(n, mr));
-      if (n.href.startsWith("#")) {
-        s.value = o.callLocalModal(n.href.substring(1), v, u, p);
+      const f = da(qt(r, mr));
+      if (r.href.startsWith("#")) {
+        a.value = s.callLocalModal(r.href.substring(1), f, p, v);
         return;
       }
-      r.value = !0, a("start"), P({
-        method: n.method,
-        url: n.href,
-        data: n.data,
+      o.value = !0, i("start"), P({
+        method: r.method,
+        url: r.href,
+        data: r.data,
         headers: {
-          ...n.headers,
+          ...r.headers,
           Accept: "text/html, application/xhtml+xml",
           "X-Requested-With": "XMLHttpRequest",
           "X-Inertia": !0,
           "X-Inertia-Version": Cr().version,
           "X-InertiaUI-Modal": !0
         }
-      }).then((f) => {
-        Rr.resolveComponent(f.data.component).then((m) => {
-          s.value = o.push(Tr(m), f.data, v, u, p);
+      }).then((h) => {
+        Rr.resolveComponent(h.data.component).then((m) => {
+          a.value = s.push(Tr(m), h.data, f, p, v);
         });
-      }).catch((f) => {
-        a("error", f);
+      }).catch((h) => {
+        i("error", h);
       }).finally(() => {
-        r.value = !1;
+        o.value = !1;
       });
     }
-    return (v, f) => {
+    return t({ handle: g }), (f, h) => {
       var m;
       return U(), he(Nt, null, [
-        (U(), Ee(wn(e.as), Kt(A(c), {
+        (U(), Ee(wn(e.as), Kt(A(l), {
           href: e.href,
           method: e.method,
           data: e.data,
           onClick: Pr(g, ["prevent"])
         }), {
           default: Y(() => [
-            De(v.$slots, "default", { loading: r.value })
+            De(f.$slots, "default", { loading: o.value })
           ]),
           _: 3
         }, 16, ["href", "method", "data"])),
-        (m = s.value) != null && m.component ? gn((U(), Ee(A(s).component, Kt({ key: 0 }, s.value.componentProps, { onEmit: l }), null, 16)), [
+        (m = a.value) != null && m.component ? gn((U(), Ee(A(a).component, Kt({ key: 0 }, a.value.componentProps, { onEmit: u }), null, 16)), [
           [yn, !1]
         ]) : Fe("", !0)
       ], 64);
