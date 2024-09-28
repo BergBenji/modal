@@ -137,15 +137,17 @@ function onAfterLeave() {
     emit('after-leave')
 }
 
-function handle() {
+function handle(overrideProps = {}) {
     if (loading.value) {
         return
     }
 
+    const mergedProps = { ...props, ...overrideProps }
+
     const modalProps = rejectNullValues(only(props, modalPropNames))
 
-    if (props.href.startsWith('#')) {
-        modalContext.value = modalStack.callLocalModal(props.href.substring(1), modalProps, onClose, onAfterLeave)
+    if (mergedProps.href.startsWith('#')) {
+        modalContext.value = modalStack.callLocalModal(mergedProps.href.substring(1), modalProps, onClose, onAfterLeave)
         return
     }
 
@@ -153,11 +155,11 @@ function handle() {
     emit('start')
 
     Axios({
-        method: props.method,
-        url: props.href,
-        data: props.data,
+        method: mergedProps.method,
+        url: mergedProps.href,
+        data: mergedProps.data,
         headers: {
-            ...props.headers,
+            ...mergedProps.headers,
             Accept: 'text/html, application/xhtml+xml',
             'X-Requested-With': 'XMLHttpRequest',
             'X-Inertia': true,
