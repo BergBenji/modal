@@ -184,6 +184,8 @@ function handle() {
         v-bind="$attrs"
         :is="as"
         :href="href"
+        :method="method"
+        :data="data"
         @click.prevent="handle"
     >
         <slot :loading="loading" />
